@@ -1,0 +1,22 @@
+We are going to execute a Functional Test which uses http://gebish.org[Geb]
+
+To make the test easier to read and maintain we created two Geb Pages; A _LoginPage_ and the
+_AnnouncementListingPage_.
+
+[source,groovy]
+./src/integration-test/groovy/grails-app/init/grails/test/security/LoginPage.groovy
+----
+include::{sourceDir}/src/integration-test/groovy/grails/test/security/LoginPage.groovy[indent=0]
+----
+
+[source,groovy]
+./src/integration-test/groovy/grails-app/init/grails/test/security/AnnouncementListingPage.groovy
+----
+include::{sourceDir}/src/integration-test/groovy/grails/test/security/AnnouncementListingPage.groovy[indent=0]
+----
+
+[source,groovy]
+./src/integration-test/groovy/grails-app/init/grails/test/security/AnnouncementControllerSpec.groovy
+----
+include::{sourceDir}/src/integration-test/groovy/grails/test/security/AnnouncementControllerSpec.groovy[indent=0]
+----

@@ -1,1 +1,2 @@
-TODO: Complete the guide
+We are going to write an app which combine both traditional web application and API.
+API endpoints are preffixed with  _/api/_

@@ -1,0 +1,17 @@
+Next test verifies _/api/announcements_ endpoint is only accessible for
+users with role _ROLE_BOSS_
+
+[source,groovy]
+./src/integration-test/groovy/grails-app/init/grails/test/security/ApiAnnouncementControllerSpec.groovy
+----
+include::{sourceDir}/src/integration-test/groovy/grails/test/security/ApiAnnouncementControllerSpec.groovy[indent=0]
+----
+
+<1> Annotation which ensures _serverPort_ property contains the random port where the app will be running for the functional test.
+<2> If you want JSON in the response, you should send the _Accept_ header indicating you accept JSON.
+<3> When you are submitting a JSON payload in the request body, you should set the _Content-Type_ header appropiately.
+<4> The server returns a 401, the resource is secured.
+<5> Call the authentication endpoint
+<6> We pass the _access_token_ we obtained from the authentication endpoint in the request headers.
+<7> An authenticated user with the role ROLE_BOSS can access the resource.
+<8> An authenticated user but without the role ROLE_BOSS is not allowed to access the resource.
