@@ -1,7 +1,7 @@
-Note. We have removed the unit tests of the project. Our project
-contains only the integration tests displayed in the previous code listings.
+NOTE: We have removed the unit tests in this project. Our project
+contains only the integration and functional tests displayed in the previous code listings.
 
-To run the tests
+To run the tests:
 
 [source, bash]
 ----

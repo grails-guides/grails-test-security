@@ -1,4 +1,4 @@
-We are going to use static Scaffolding to generate a controller for the Web part of the app.
+We are going to use static Scaffolding to generate a controller for the web app.
 
 [source, bash]
 ----
