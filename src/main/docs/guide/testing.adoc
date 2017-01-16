@@ -1,6 +1,6 @@
-We are going to execute a Functional Test which uses http://gebish.org[Geb]
+Now we are going to execute a Functional Test using the http://gebish.org[Geb framework].
 
-To make the test easier to read and maintain we created two Geb Pages; A _LoginPage_ and the
+To make this test easier to read and maintain we've created two Geb Pages: a _LoginPage_ and an
 _AnnouncementListingPage_.
 
 [source,groovy]
