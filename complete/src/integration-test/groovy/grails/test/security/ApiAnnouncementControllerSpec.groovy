@@ -10,15 +10,12 @@ import spock.lang.Specification
 @Rollback
 class ApiAnnouncementControllerSpec extends Specification {
 
-    @Value('${local.server.port}') // <1>
-    Integer serverPort
-
     def "test /api/announcements url is secured"() {
         given:
         RestBuilder rest = new RestBuilder()
 
         when:
-        def resp = rest.get("http://localhost:${serverPort}/api/announcements") {
+        def resp = rest.get("http://localhost:${serverPort}/api/announcements") { // <1>
             header("Accept", "application/json") // <2>
             header("Content-Type", "application/json") // <3>
         }
