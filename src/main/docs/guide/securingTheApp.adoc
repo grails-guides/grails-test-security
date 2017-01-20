@@ -1,9 +1,10 @@
-Add a dependency on the http://alvarosanchez.github.io/grails-spring-security-rest/latest/docs/[Grails Spring Security Rest plugin] to our `build.gradle` file.
+Add a dependency on the http://alvarosanchez.github.io/grails-spring-security-rest/latest/docs/[Grails Spring Security Rest plugin] to our `build.gradle` file. Also, add the REST client for testing.
 
 [source,groovy]
 ./build.gradle
 ----
 include::{sourceDir}/build.gradle[indent=0,lines=56]
+include::{sourceDir}/build.gradle[indent=0,lines=57]
 ----
 
 We'll run the _s2-quickstart_ command, provided by the  https://grails-plugins.github.io/grails-spring-security-core/v3/index.html[Spring Security Core Plugin],
