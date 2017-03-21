@@ -1,7 +1,7 @@
 Our first test will verify that the _/api/announcements_ endpoint is only accessible to users with role _ROLE_BOSS_
 
 [source,groovy]
-./src/integration-test/groovy/grails-app/init/grails/test/security/ApiAnnouncementControllerSpec.groovy
+./src/integration-test/groovy/grails/test/security/ApiAnnouncementControllerSpec.groovy
 ----
 include::{sourceDir}/src/integration-test/groovy/grails/test/security/ApiAnnouncementControllerSpec.groovy[indent=0]
 ----
