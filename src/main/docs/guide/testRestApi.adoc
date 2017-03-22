@@ -1,3 +1,11 @@
+To test REST part of the application, we use https://github.com/grails-plugins/grails-rest-client-builder[Rest Client Builder Grails Plugin]. We need to add the dependency: 
+
+[source,groovy]
+./build.gradle
+----
+include::{sourceDir}/build.gradle[tags=dependencyRestClient]
+----
+
 Our first test will verify that the _/api/announcements_ endpoint is only accessible to users with role _ROLE_BOSS_
 
 [source,groovy]

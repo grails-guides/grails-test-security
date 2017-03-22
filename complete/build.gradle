@@ -56,7 +56,11 @@ dependencies {
     // tag::dependencySSR[]
     compile ("org.grails.plugins:spring-security-rest:2.0.0.M2")
     // end::dependencySSR[]
+
+    // tag::dependencyRestClient[]
     testCompile "org.grails:grails-datastore-rest-client"
+    // end::dependencyRestClient[]
+
 }
 
 bootRun {
