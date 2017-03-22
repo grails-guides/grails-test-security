@@ -3,7 +3,7 @@ Add a dependency on the http://alvarosanchez.github.io/grails-spring-security-re
 [source,groovy]
 ./build.gradle
 ----
-include::{sourceDir}/build.gradle[indent=0,lines=56]
+include::{sourceDir}/build.gradle[tags=dependencySSR]
 ----
 
 We'll run the _s2-quickstart_ command, provided by the  https://grails-plugins.github.io/grails-spring-security-core/v3/index.html[Spring Security Core Plugin],

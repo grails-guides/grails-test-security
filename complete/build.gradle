@@ -53,7 +53,9 @@ dependencies {
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    // tag::dependencySSR[]
     compile ("org.grails.plugins:spring-security-rest:2.0.0.M2")
+    // end::dependencySSR[]
     testCompile "org.grails:grails-datastore-rest-client"
 }
 
