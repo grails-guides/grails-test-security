@@ -3,3 +3,4 @@
 .gradle
 /complete/build
 .DS_Store
+/complete/.idea
