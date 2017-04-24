@@ -3,8 +3,10 @@ package grails.test.security
 import grails.gorm.DetachedCriteria
 import groovy.transform.ToString
 
-import org.apache.commons.lang.builder.HashCodeBuilder
+import org.codehaus.groovy.util.HashCodeHelper
+import grails.compiler.GrailsCompileStatic
 
+@GrailsCompileStatic
 @ToString(cache=true, includeNames=true, includePackage=false)
 class UserSecurityRole implements Serializable {
 
@@ -13,27 +15,23 @@ class UserSecurityRole implements Serializable {
 	User user
 	SecurityRole securityRole
 
-	UserSecurityRole(User u, SecurityRole r) {
-		this()
-		user = u
-		securityRole = r
-	}
-
 	@Override
 	boolean equals(other) {
-		if (!(other instanceof UserSecurityRole)) {
-			return false
+		if (other instanceof UserSecurityRole) {
+			other.userId == user?.id && other.securityRoleId == securityRole?.id
 		}
-
-		other.user?.id == user?.id && other.securityRole?.id == securityRole?.id
 	}
 
-	@Override
+    @Override
 	int hashCode() {
-		def builder = new HashCodeBuilder()
-		if (user) builder.append(user.id)
-		if (securityRole) builder.append(securityRole.id)
-		builder.toHashCode()
+	    int hashCode = HashCodeHelper.initHash()
+        if (user) {
+            hashCode = HashCodeHelper.updateHash(hashCode, user.id)
+		}
+		if (securityRole) {
+		    hashCode = HashCodeHelper.updateHash(hashCode, securityRole.id)
+		}
+		hashCode
 	}
 
 	static UserSecurityRole get(long userId, long securityRoleId) {
@@ -53,45 +51,32 @@ class UserSecurityRole implements Serializable {
 
 	static UserSecurityRole create(User user, SecurityRole securityRole, boolean flush = false) {
 		def instance = new UserSecurityRole(user: user, securityRole: securityRole)
-		instance.save(flush: flush, insert: true)
+		instance.save(flush: flush)
 		instance
 	}
 
-	static boolean remove(User u, SecurityRole r, boolean flush = false) {
-		if (u == null || r == null) return false
-
-		int rowCount = UserSecurityRole.where { user == u && securityRole == r }.deleteAll()
-
-		if (flush) { UserSecurityRole.withSession { it.flush() } }
-
-		rowCount
+	static boolean remove(User u, SecurityRole r) {
+		if (u != null && r != null) {
+			UserSecurityRole.where { user == u && securityRole == r }.deleteAll()
+		}
 	}
 
-	static void removeAll(User u, boolean flush = false) {
-		if (u == null) return
-
-		UserSecurityRole.where { user == u }.deleteAll()
-
-		if (flush) { UserSecurityRole.withSession { it.flush() } }
+	static int removeAll(User u) {
+		u == null ? 0 : UserSecurityRole.where { user == u }.deleteAll() as int
 	}
 
-	static void removeAll(SecurityRole r, boolean flush = false) {
-		if (r == null) return
-
-		UserSecurityRole.where { securityRole == r }.deleteAll()
-
-		if (flush) { UserSecurityRole.withSession { it.flush() } }
+	static int removeAll(SecurityRole r) {
+		r == null ? 0 : UserSecurityRole.where { securityRole == r }.deleteAll() as int
 	}
 
 	static constraints = {
 		securityRole validator: { SecurityRole r, UserSecurityRole ur ->
-			if (ur.user == null || ur.user.id == null) return
-			boolean existing = false
-			UserSecurityRole.withNewSession {
-				existing = UserSecurityRole.exists(ur.user.id, r.id)
-			}
-			if (existing) {
-				return 'userRole.exists'
+			if (ur.user?.id) {
+				UserSecurityRole.withNewSession {
+					if (UserSecurityRole.exists(ur.user.id, r.id)) {
+						return ['userRole.exists']
+					}
+				}
 			}
 		}
 	}
