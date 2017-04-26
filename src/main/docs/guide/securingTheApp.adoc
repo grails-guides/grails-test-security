@@ -8,14 +8,6 @@ to our `build.gradle` file.
 include::{sourceDir}/build.gradle[tags=dependencySSR]
 ----
 
-Bump up GORM version to 6.1.1
-
-[source,groovy]
-./gradle.properties
-----
-include::{sourceDir}/gradle.properties[]
-----
-
 We'll run the _s2-quickstart_ command, provided by the  https://grails-plugins.github.io/grails-spring-security-core/v3/index.html[Spring Security Core Plugin],
 to generate `User` and `Authority` classes.
 
@@ -57,20 +49,6 @@ include::{sourceDir}/src/main/groovy/grails/test/security/UserPasswordEncoderLis
 .grails-app/conf/spring/resources.groovy
 ----
 include::{sourceDir}/grails-app/conf/spring/resources.groovy[indent=0]
-----
-
-For older versions of GORM, `s2-quickstart` handles password encoding directly in the generated domain class with the
-injection of `SpringSecurityService` in the User class. Since Grails 3.2.8. service injection
-is disabled in domain classes. However, you can turn service injection on in domain classes:
-
-[source,groovy]
-.grails-app/conf/application.yml
-----
-grails:
-    gorm:
-        # Whether to autowire entities.
-        # Disabled by default for performance reasons.
-        autowire: true
 ----
 
 We'll configure the security rules of the application in the file _application.groovy_, as show below. We have one http://alvarosanchez.github.io/grails-spring-security-rest/latest/docs/#_plugin_configuration[stateless chain and one Traditional Chain].
