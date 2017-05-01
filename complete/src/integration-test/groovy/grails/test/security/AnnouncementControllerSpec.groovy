@@ -3,10 +3,11 @@ package grails.test.security
 import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
 
+@SuppressWarnings('MethodName')
 @Integration
 class AnnouncementControllerSpec extends GebSpec {
 
-    void "test /announcement/index is secured, but accesible to users with role ROLE_BOSS"() {
+    void 'test /announcement/index is secured, but accesible to users with role ROLE_BOSS'() {
         when: 'try to visit announcement listing without login'
         go '/announcement/index'
 
@@ -20,7 +21,7 @@ class AnnouncementControllerSpec extends GebSpec {
         at AnnouncementListingPage
     }
 
-    void "test /announcement/index is secured, but accesible to users with role ROLE_EMPLOYEE"() {
+    void 'test /announcement/index is secured, but accesible to users with role ROLE_EMPLOYEE'() {
         when: 'try to visit announcement listing without login'
         go '/announcement/index'
 

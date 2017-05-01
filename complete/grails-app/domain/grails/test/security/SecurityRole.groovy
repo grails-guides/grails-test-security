@@ -10,7 +10,6 @@ import grails.compiler.GrailsCompileStatic
 class SecurityRole implements Serializable {
 
 	private static final long serialVersionUID = 1
-
 	String authority
 
 	static constraints = {

@@ -6,6 +6,7 @@ import groovy.transform.ToString
 import org.codehaus.groovy.util.HashCodeHelper
 import grails.compiler.GrailsCompileStatic
 
+@SuppressWarnings(['FactoryMethodName', 'Instanceof'])
 @GrailsCompileStatic
 @ToString(cache=true, includeNames=true, includePackage=false)
 class UserSecurityRole implements Serializable {
@@ -22,14 +23,14 @@ class UserSecurityRole implements Serializable {
 		}
 	}
 
-    @Override
+	@Override
 	int hashCode() {
-	    int hashCode = HashCodeHelper.initHash()
-        if (user) {
-            hashCode = HashCodeHelper.updateHash(hashCode, user.id)
+		int hashCode = HashCodeHelper.initHash()
+		if (user) {
+			hashCode = HashCodeHelper.updateHash(hashCode, user.id)
 		}
 		if (securityRole) {
-		    hashCode = HashCodeHelper.updateHash(hashCode, securityRole.id)
+			hashCode = HashCodeHelper.updateHash(hashCode, securityRole.id)
 		}
 		hashCode
 	}
@@ -45,7 +46,7 @@ class UserSecurityRole implements Serializable {
 	private static DetachedCriteria criteriaFor(long userId, long securityRoleId) {
 		UserSecurityRole.where {
 			user == User.load(userId) &&
-			securityRole == SecurityRole.load(securityRoleId)
+					securityRole == SecurityRole.load(securityRoleId)
 		}
 	}
 

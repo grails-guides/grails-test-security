@@ -3,21 +3,21 @@ package grails.test.security
 import grails.plugins.rest.client.RestBuilder
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
-import org.springframework.beans.factory.annotation.Value
 import spock.lang.Specification
 
+@SuppressWarnings(['MethodName', 'DuplicateNumberLiteral'])
 @Integration
 @Rollback
 class ApiAnnouncementControllerSpec extends Specification {
 
-    def "test /api/announcements url is secured"() {
+    def 'test /api/announcements url is secured'() {
         given:
         RestBuilder rest = new RestBuilder()
 
         when:
         def resp = rest.get("http://localhost:${serverPort}/api/announcements") { // <1>
-            header("Accept", "application/json") // <2>
-            header("Content-Type", "application/json") // <3>
+            accept('application/json') // <2>
+            contentType('application/json') // <3>
         }
 
         then:
@@ -32,8 +32,8 @@ class ApiAnnouncementControllerSpec extends Specification {
         when: 'login with the sherlock'
         RestBuilder rest = new RestBuilder()
         def resp = rest.post("http://localhost:${serverPort}/api/login") { // <5>
-            header("Accept", "application/json")
-            header("Content-Type", "application/json")
+            accept('application/json')
+            contentType('application/json')
             json {
                 username = 'sherlock'
                 password = 'elementary'
@@ -52,8 +52,8 @@ class ApiAnnouncementControllerSpec extends Specification {
 
         when:
         resp = rest.get("http://localhost:${serverPort}/api/announcements") {
-            header("Accept", "application/json")
-            header("Authorization", "Bearer ${accessToken}") // <6>
+            accept('application/json')
+            header('Authorization', "Bearer ${accessToken}") // <6>
         }
 
         then:
@@ -65,8 +65,8 @@ class ApiAnnouncementControllerSpec extends Specification {
         RestBuilder rest = new RestBuilder()
 
         def resp = rest.post("http://localhost:${serverPort}/api/login") {
-            header("Accept", "application/json")
-            header("Content-Type", "application/json")
+            accept('application/json')
+            contentType('application/json')
             json {
                 username = 'watson'
                 password = '221Bbakerstreet'
@@ -86,8 +86,8 @@ class ApiAnnouncementControllerSpec extends Specification {
 
         when:
         resp = rest.get("http://localhost:${serverPort}/api/announcements") {
-            header("Accept", "application/json")
-            header("Authorization", "Bearer ${accessToken}")
+            accept('application/json')
+            header('Authorization', "Bearer ${accessToken}")
         }
 
         then:

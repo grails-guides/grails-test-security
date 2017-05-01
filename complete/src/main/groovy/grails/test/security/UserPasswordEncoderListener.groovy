@@ -7,10 +7,11 @@ import org.grails.datastore.mapping.engine.event.AbstractPersistenceEventListene
 import org.grails.datastore.mapping.engine.event.EventType
 import org.grails.datastore.mapping.engine.event.PreInsertEvent
 import org.grails.datastore.mapping.engine.event.PreUpdateEvent
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationEvent
+import org.springframework.beans.factory.annotation.Autowired
 import groovy.transform.CompileStatic
 
+@SuppressWarnings(['UnnecessaryGetter', 'LineLength', 'Instanceof'])
 @CompileStatic
 class UserPasswordEncoderListener extends AbstractPersistenceEventListener {
 
@@ -26,7 +27,7 @@ class UserPasswordEncoderListener extends AbstractPersistenceEventListener {
         if (event.entityObject instanceof User) {
             User u = (event.entityObject as User)
             if (u.password && (event.eventType == EventType.PreInsert || (event.eventType == EventType.PreUpdate && u.isDirty('password')))) {
-                event.getEntityAccess().setProperty("password", encodePassword(u.password))
+                event.getEntityAccess().setProperty('password', encodePassword(u.password))
             }
         }
     }

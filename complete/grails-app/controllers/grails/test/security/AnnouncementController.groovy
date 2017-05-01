@@ -1,12 +1,16 @@
 package grails.test.security
 
-import static org.springframework.http.HttpStatus.*
+import static org.springframework.http.HttpStatus.NO_CONTENT
+import static org.springframework.http.HttpStatus.CREATED
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.OK
 import grails.transaction.Transactional
 
+@SuppressWarnings('LineLength')
 @Transactional(readOnly = true)
 class AnnouncementController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -17,6 +21,7 @@ class AnnouncementController {
         respond announcement
     }
 
+    @SuppressWarnings(['GrailsMassAssignment', 'FactoryMethodName'])
     def create() {
         respond new Announcement(params)
     }
@@ -71,7 +76,7 @@ class AnnouncementController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'announcement.label', default: 'Announcement'), announcement.id])
                 redirect announcement
             }
-            '*'{ respond announcement, [status: OK] }
+            '*' { respond announcement, [status: OK] }
         }
     }
 
@@ -89,9 +94,9 @@ class AnnouncementController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'announcement.label', default: 'Announcement'), announcement.id])
-                redirect action:"index", method:"GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -99,9 +104,9 @@ class AnnouncementController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'announcement.label', default: 'Announcement'), params.id])
-                redirect action: "index", method: "GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }
