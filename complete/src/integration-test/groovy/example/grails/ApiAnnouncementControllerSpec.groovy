@@ -1,95 +1,103 @@
 package example.grails
 
-import grails.plugins.rest.client.RestBuilder
 import grails.testing.mixin.integration.Integration
+import io.micronaut.core.type.Argument
+import io.micronaut.http.HttpRequest
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.HttpStatus
+import io.micronaut.http.client.HttpClient
+import io.micronaut.http.client.exceptions.HttpClientException
+import spock.lang.AutoCleanup
+import spock.lang.Shared
 import spock.lang.Specification
+import grails.testing.spock.OnceBefore
 
 @SuppressWarnings(['MethodName', 'DuplicateNumberLiteral'])
 @Integration
 class ApiAnnouncementControllerSpec extends Specification {
 
-    def 'test /api/announcements url is secured'() {
-        given:
-        RestBuilder rest = new RestBuilder()
+    @Shared
+    @AutoCleanup
+    HttpClient client
 
+    @OnceBefore
+    void init() {
+        client  = HttpClient.create(new URL("http://localhost:$serverPort"))
+    }
+
+    def 'test /api/announcements url is secured'() {
         when:
-        def resp = rest.get("http://localhost:${serverPort}/api/announcements") { // <1>
-            accept('application/json') // <2>
-            contentType('application/json') // <3>
-        }
+        HttpRequest request = HttpRequest.GET('/api/announcements')
+        HttpResponse resp = client.toBlocking().exchange(request, Argument.of(List, AnnouncementView), Argument.of(CustomError))
 
         then:
-        resp.status == 401 // <4>
-        resp.json.status == 401
-        resp.json.error == 'Unauthorized'
-        resp.json.message == 'No message available'
-        resp.json.path == '/api/announcements'
+        HttpClientException e = thrown(HttpClientException)
+        e.response.status == HttpStatus.UNAUTHORIZED // <4>
+
+        when:
+        Optional<CustomError> jsonError = e.response.getBody(CustomError)
+
+        then:
+        jsonError.isPresent()
+        jsonError.get().status == 401
+        jsonError.get().error == 'Unauthorized'
+        jsonError.get().message == 'No message available'
+        jsonError.get().path == '/api/announcements'
     }
 
     def "test a user with the role ROLE_BOSS is able to access /api/announcements url"() {
         when: 'login with the sherlock'
-        RestBuilder rest = new RestBuilder()
-        def resp = rest.post("http://localhost:${serverPort}/api/login") { // <5>
-            accept('application/json')
-            contentType('application/json')
-            json {
-                username = 'sherlock'
-                password = 'elementary'
-            }
-        }
+        UserCredentials credentials = new UserCredentials(username: 'sherlock', password: 'elementary')
+        HttpRequest request = HttpRequest.POST('/api/login', credentials) // <5>
+        HttpResponse<BearerToken> resp = client.toBlocking().exchange(request, BearerToken)
 
         then:
-        resp.status == 200
-        resp.json.roles.find { it == 'ROLE_BOSS' }
+        resp.status.code == 200
+        resp.body().roles.find { it == 'ROLE_BOSS' }
 
         when:
-        def accessToken = resp.json.access_token
+        String accessToken = resp.body().accessToken
 
         then:
         accessToken
 
         when:
-        resp = rest.get("http://localhost:${serverPort}/api/announcements") {
-            accept('application/json')
-            header('Authorization', "Bearer ${accessToken}") // <6>
-        }
+        HttpResponse<List> rsp = client.toBlocking().exchange(HttpRequest.GET('/api/announcements')
+                .header('Authorization', "Bearer ${accessToken}"), Argument.of(List, AnnouncementView)) // <6>
 
         then:
-        resp.status == 200 // <7>
+        rsp.status.code == 200 // <7>
+        rsp.body() != null
+        ((List)rsp.body()).size() == 1
+        ((List)rsp.body()).get(0) instanceof AnnouncementView
+        ((AnnouncementView) ((List)rsp.body()).get(0)).message == 'The Hound of the Baskervilles'
     }
 
     def "test a user with the role ROLE_EMPLOYEE is NOT able to access /api/announcements url"() {
         when: 'login with the watson'
-        RestBuilder rest = new RestBuilder()
 
-        def resp = rest.post("http://localhost:${serverPort}/api/login") {
-            accept('application/json')
-            contentType('application/json')
-            json {
-                username = 'watson'
-                password = '221Bbakerstreet'
-            }
-        }
+        UserCredentials creds = new UserCredentials(username: 'watson', password: '221Bbakerstreet')
+        HttpRequest request = HttpRequest.POST('/api/login', creds) // <5>
+        HttpResponse<BearerToken> resp = client.toBlocking().exchange(request, BearerToken)
 
         then:
-        resp.status == 200
-        !resp.json.roles.find { it == 'ROLE_BOSS' }
-        resp.json.roles.find { it == 'ROLE_EMPLOYEE' }
+        resp.status.code == 200
+        !resp.body().roles.find { it == 'ROLE_BOSS' }
+        resp.body().roles.find { it == 'ROLE_EMPLOYEE' }
 
         when:
-        def accessToken = resp.json.access_token
+        String accessToken = resp.body().accessToken
 
         then:
         accessToken
 
         when:
-        resp = rest.get("http://localhost:${serverPort}/api/announcements") {
-            accept('application/json')
-            header('Authorization', "Bearer ${accessToken}")
-        }
+        resp = client.toBlocking().exchange(HttpRequest.GET('/api/announcements')
+                .header('Authorization', "Bearer ${accessToken}"))
 
         then:
-        resp.status == 403 // <8>
+        def e = thrown(HttpClientException)
+        e.response.status == HttpStatus.FORBIDDEN // <8>
 
     }
 }

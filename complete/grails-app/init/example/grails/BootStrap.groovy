@@ -5,6 +5,8 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class BootStrap {
 
+    AnnouncementService announcementService
+
     def init = { servletContext ->
 
         def authorities = ['ROLE_BOSS', 'ROLE_EMPLOYEE']
@@ -25,6 +27,8 @@ class BootStrap {
             u.save()
             new UserSecurityRole(user: u, securityRole: SecurityRole.findByAuthority('ROLE_EMPLOYEE')).save()
         }
+
+        announcementService.save('The Hound of the Baskervilles')
     }
     def destroy = {
     }

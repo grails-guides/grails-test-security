@@ -68,7 +68,7 @@ dependencies {
     testCompile "org.grails.plugins:geb:1.1.2"
     testCompile "org.grails:grails-web-testing-support"
     // tag::dependencyRestClient[]
-    testCompile "org.grails:grails-datastore-rest-client"
+    testCompile "io.micronaut:http-client:$micronautVersion"
     // end::dependencyRestClient[]
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
