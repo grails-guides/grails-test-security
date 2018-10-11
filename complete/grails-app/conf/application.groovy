@@ -1,6 +1,15 @@
 grails {
     plugin {
         springsecurity {
+            rest {
+                token {
+                    storage {
+                        jwt {
+                            secret = 'pleaseChangeThisSecretForANewOne'
+                        }
+                    }
+                }
+            }
             securityConfigType = "InterceptUrlMap"  // <1>
             filterChain {
                 chainMap = [

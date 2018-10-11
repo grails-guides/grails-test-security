@@ -55,8 +55,8 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.5.Final"
     compile "org.grails.plugins:gsp"
     // tag::dependencySSR[]
-    compile ("org.grails.plugins:spring-security-rest:2.0.0.M2")
-    compile 'org.grails.plugins:spring-security-core:3.2.0.M1'
+    compile ("org.grails.plugins:spring-security-rest:2.0.0.RC1")
+    compile 'org.grails.plugins:spring-security-core:3.2.3'
     // end::dependencySSR[]
     console "org.grails:grails-console"
     profile "org.grails.profiles:web"
