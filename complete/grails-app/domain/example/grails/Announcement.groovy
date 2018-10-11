@@ -1,4 +1,4 @@
-package grails.test.security
+package example.grails
 
 import groovy.transform.CompileStatic
 

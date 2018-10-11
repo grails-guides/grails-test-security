@@ -1,4 +1,4 @@
-package grails.test.security
+package example.grails
 
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.CREATED

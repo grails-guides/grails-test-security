@@ -3,12 +3,12 @@ We'll create a http://docs.grails.org/latest/ref/Domain%20Classes/Usage.html[Dom
 [source, bash]
 ----
 ./grailsw create-domain-class Announcement
-| Created grails-app/domain/grails/test/security/Announcement.groovy
-| Created src/test/groovy/grails/test/security/AnnouncementSpec.groovy
+| Created grails-app/domain/example/grails/Announcement.groovy
+| Created src/test/groovy/example/grails/AnnouncementSpec.groovy
 ----
 
 [source,groovy]
-.grails-app/domain/grails/test/security/Announcement.groovy
+.grails-app/domain/example/grails/Announcement.groovy
 ----
-include::{sourceDir}/grails-app/domain/grails/test/security/Announcement.groovy[indent=0]
+include::{sourceDir}/grails-app/domain/example/grails/Announcement.groovy[indent=0]
 ----

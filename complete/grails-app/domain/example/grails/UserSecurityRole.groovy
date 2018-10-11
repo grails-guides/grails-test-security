@@ -1,4 +1,4 @@
-package grails.test.security
+package example.grails
 
 import grails.gorm.DetachedCriteria
 import groovy.transform.ToString

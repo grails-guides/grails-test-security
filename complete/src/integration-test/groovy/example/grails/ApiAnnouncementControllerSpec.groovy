@@ -1,4 +1,4 @@
-package grails.test.security
+package example.grails
 
 import grails.plugins.rest.client.RestBuilder
 import grails.testing.mixin.integration.Integration

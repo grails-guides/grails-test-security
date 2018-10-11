@@ -13,36 +13,36 @@ to generate `User` and `Authority` classes.
 
 [source,bash]
 ----
-./grailsw s2-quickstart grails.test.security User SecurityRole
+./grailsw s2-quickstart example.grails User SecurityRole
 ----
 
 `s2-quickstart` script generates three domain classes; `User`, `SecurityRole` and `UserSecurityRole`.
 
 [source,groovy]
-.grails-app/domain/grails/test/security/User.groovy
+.grails-app/domain/example/grails/User.groovy
 ----
-include::{sourceDir}/grails-app/domain/grails/test/security/User.groovy[indent=0]
-----
-
-[source,groovy]
-.grails-app/domain/grails/test/security/SecurityRole.groovy
-----
-include::{sourceDir}/grails-app/domain/grails/test/security/SecurityRole.groovy[indent=0]
+include::{sourceDir}/grails-app/domain/example/grails/User.groovy[indent=0]
 ----
 
 [source,groovy]
-.grails-app/domain/grails/test/security/UserSecurityRole.groovy
+.grails-app/domain/example/grails/SecurityRole.groovy
 ----
-include::{sourceDir}/grails-app/domain/grails/test/security/UserSecurityRole.groovy[indent=0]
+include::{sourceDir}/grails-app/domain/example/grails/SecurityRole.groovy[indent=0]
+----
+
+[source,groovy]
+.grails-app/domain/example/grails/UserSecurityRole.groovy
+----
+include::{sourceDir}/grails-app/domain/example/grails/UserSecurityRole.groovy[indent=0]
 ----
 
 If you are using GORM 6.0.10 or a later version and Spring Security core 3.1.2 or later version, s2-quickstart
 generates and registers a bean to handle password encoding:
 
 [source,groovy]
-.src/main/groovy/grails/test/security/UserPasswordEncoderListener.groovy
+.src/main/groovy/example/grails/UserPasswordEncoderListener.groovy
 ----
-include::{sourceDir}/src/main/groovy/grails/test/security/UserPasswordEncoderListener.groovy[indent=0]
+include::{sourceDir}/src/main/groovy/example/grails/UserPasswordEncoderListener.groovy[indent=0]
 ----
 
 [source,groovy]
@@ -72,7 +72,7 @@ include::{sourceDir}/grails-app/conf/application.groovy[indent=0]
 
 We'll populate our database in `BootStrap`, inserting two users when the application starts.
 
-.grails-app/init/grails/test/security/BootStrap.groovy
+.grails-app/init/example/grails/BootStrap.groovy
 ----
-include::{sourceDir}/grails-app/init/grails/test/security/BootStrap.groovy[indent=0]
+include::{sourceDir}/grails-app/init/example/grails/BootStrap.groovy[indent=0]
 ----

@@ -1,4 +1,4 @@
-package grails.test.security
+package example.grails
 
 import grails.plugin.springsecurity.SpringSecurityService
 import org.grails.datastore.mapping.core.Datastore

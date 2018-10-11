@@ -1,4 +1,4 @@
-package grails.test.security
+package example.grails
 
 class UrlMappings {
 

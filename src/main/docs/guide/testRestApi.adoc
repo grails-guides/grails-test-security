@@ -9,9 +9,9 @@ include::{sourceDir}/build.gradle[tags=dependencyRestClient]
 Our first test will verify that the _/api/announcements_ endpoint is only accessible to users with role _ROLE_BOSS_
 
 [source,groovy]
-./src/integration-test/groovy/grails/test/security/ApiAnnouncementControllerSpec.groovy
+./src/integration-test/groovy/example/grails/ApiAnnouncementControllerSpec.groovy
 ----
-include::{sourceDir}/src/integration-test/groovy/grails/test/security/ApiAnnouncementControllerSpec.groovy[indent=0]
+include::{sourceDir}/src/integration-test/groovy/example/grails/ApiAnnouncementControllerSpec.groovy[indent=0]
 ----
 
 <1> _serverPort_ property is automatically injected and it contains the random port where the app will be running for the functional test.

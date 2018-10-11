@@ -1,4 +1,4 @@
-package grails.test.security
+package example.grails
 
 import geb.spock.GebSpec
 import grails.testing.mixin.integration.Integration

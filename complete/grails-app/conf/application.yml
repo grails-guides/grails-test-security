@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: grails.test.security
+        defaultPackage: example.grails
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
