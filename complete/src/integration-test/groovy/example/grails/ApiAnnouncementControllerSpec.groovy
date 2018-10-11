@@ -12,7 +12,7 @@ import spock.lang.Shared
 import spock.lang.Specification
 import grails.testing.spock.OnceBefore
 
-@SuppressWarnings(['MethodName', 'DuplicateNumberLiteral'])
+@SuppressWarnings(['MethodName', 'DuplicateNumberLiteral', 'Instanceof'])
 @Integration
 class ApiAnnouncementControllerSpec extends Specification {
 
@@ -28,7 +28,7 @@ class ApiAnnouncementControllerSpec extends Specification {
     def 'test /api/announcements url is secured'() {
         when:
         HttpRequest request = HttpRequest.GET('/api/announcements')
-        HttpResponse resp = client.toBlocking().exchange(request,  // <3>
+        client.toBlocking().exchange(request,  // <3>
                 Argument.of(List, AnnouncementView),
                 Argument.of(CustomError))
 
