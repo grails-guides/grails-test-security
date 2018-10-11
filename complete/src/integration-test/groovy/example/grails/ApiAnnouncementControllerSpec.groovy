@@ -2,12 +2,10 @@ package example.grails
 
 import grails.plugins.rest.client.RestBuilder
 import grails.testing.mixin.integration.Integration
-import grails.transaction.Rollback
 import spock.lang.Specification
 
 @SuppressWarnings(['MethodName', 'DuplicateNumberLiteral'])
 @Integration
-@Rollback
 class ApiAnnouncementControllerSpec extends Specification {
 
     def 'test /api/announcements url is secured'() {
