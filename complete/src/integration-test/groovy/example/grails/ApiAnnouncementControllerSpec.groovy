@@ -20,15 +20,17 @@ class ApiAnnouncementControllerSpec extends Specification {
     @AutoCleanup
     HttpClient client
 
-    @OnceBefore
+    @OnceBefore // <1>
     void init() {
-        client  = HttpClient.create(new URL("http://localhost:$serverPort"))
+        client  = HttpClient.create(new URL("http://localhost:$serverPort")) // <2>
     }
 
     def 'test /api/announcements url is secured'() {
         when:
         HttpRequest request = HttpRequest.GET('/api/announcements')
-        HttpResponse resp = client.toBlocking().exchange(request, Argument.of(List, AnnouncementView), Argument.of(CustomError))
+        HttpResponse resp = client.toBlocking().exchange(request,  // <3>
+                Argument.of(List, AnnouncementView),
+                Argument.of(CustomError))
 
         then:
         HttpClientException e = thrown(HttpClientException)
@@ -77,7 +79,7 @@ class ApiAnnouncementControllerSpec extends Specification {
         when: 'login with the watson'
 
         UserCredentials creds = new UserCredentials(username: 'watson', password: '221Bbakerstreet')
-        HttpRequest request = HttpRequest.POST('/api/login', creds) // <5>
+        HttpRequest request = HttpRequest.POST('/api/login', creds)
         HttpResponse<BearerToken> resp = client.toBlocking().exchange(request, BearerToken)
 
         then:
@@ -98,6 +100,5 @@ class ApiAnnouncementControllerSpec extends Specification {
         then:
         def e = thrown(HttpClientException)
         e.response.status == HttpStatus.FORBIDDEN // <8>
-
     }
 }

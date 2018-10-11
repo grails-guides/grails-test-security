@@ -1,9 +1,15 @@
-To test REST part of the application, we use https://github.com/grails-plugins/grails-rest-client-builder[Rest Client Builder Grails Plugin]. We need to add the dependency: 
+To test REST part of the application, we use https://docs.micronaut.io/snapshot/guide/index.html#httpClient[Micronaut's HttpClient]. We need to add the dependency:
+
+[source,groovy]
+./gradle.properties
+----
+include::{sourceDir}/gradle.properties[]
+----
 
 [source,groovy]
 ./build.gradle
 ----
-include::{sourceDir}/build.gradle[tags=dependencyRestClient]
+include::{sourceDir}/build.gradle[tags=micronaut]
 ----
 
 Our first test will verify that the _/api/announcements_ endpoint is only accessible to users with role _ROLE_BOSS_
@@ -14,9 +20,9 @@ Our first test will verify that the _/api/announcements_ endpoint is only access
 include::{sourceDir}/src/integration-test/groovy/example/grails/ApiAnnouncementControllerSpec.groovy[indent=0]
 ----
 
-<1> _serverPort_ property is automatically injected and it contains the random port where the app will be running for the functional test.
-<2> If you want JSON in the response, you should configure the _Accept_ header to indicate you expect a JSON response.
-<3> When you are submitting a JSON payload in the request body, you should set the _Content-Type_ header appropriately.
+<1> The `grails.testing.spock.OnceBefore` annotation is a shorthand way of accomplishing the same behavior that would be accomplished by applying both the `@RunOnce` and `@Before` annotations to a fixture method.
+<2> _serverPort_ property is automatically injected and it contains the random port where the app will be running for the functional test.
+<3> With Micronaut HTTP client you can bind POJOs to the response body easily.
 <4> The server returns a 401, indicating that the resource is secured.
 <5> Call the authentication endpoint
 <6> We pass the _access_token_ we obtained from the authentication endpoint in the request headers.

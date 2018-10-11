@@ -67,9 +67,9 @@ dependencies {
     testCompile "org.grails:grails-gorm-testing-support"
     testCompile "org.grails.plugins:geb:1.1.2"
     testCompile "org.grails:grails-web-testing-support"
-    // tag::dependencyRestClient[]
+    // tag::micronaut[]
     testCompile "io.micronaut:http-client:$micronautVersion"
-    // end::dependencyRestClient[]
+    // end::micronaut[]
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
