@@ -7,6 +7,7 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:$assetPipelineVersion"
         classpath "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
+        classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.4"
     }
 }
 
@@ -20,6 +21,7 @@ apply plugin:"org.grails.grails-web"
 apply plugin:"asset-pipeline"
 apply plugin:"org.grails.grails-gsp"
 apply plugin: 'codenarc'
+apply plugin:"com.energizedwork.webdriver-binaries"
 
 repositories {
     mavenLocal()
@@ -99,4 +101,14 @@ tasks.withType(Test) {
     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
     systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
     systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
+    beforeTest { descriptor -> logger.quiet " -- $descriptor" }
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat 'full'
+    }
+}
+
+webdriverBinaries {
+    chromedriver '2.42'
+    geckodriver '0.23.0'
 }
