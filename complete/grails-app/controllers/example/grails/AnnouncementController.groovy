@@ -1,12 +1,11 @@
 package example.grails
 
-import grails.gorm.transactions.ReadOnly
-import grails.gorm.transactions.Transactional
-
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
+import grails.gorm.transactions.ReadOnly
+import grails.gorm.transactions.Transactional
 
 @SuppressWarnings('LineLength')
 @ReadOnly
