@@ -15,7 +15,8 @@ class AnnouncementControllerSpec extends GebSpec {
         at LoginPage
 
         when: 'signs in with a ROLE_BOSS user'
-        login('sherlock', 'elementary')
+        LoginPage page = browser.page(LoginPage)
+        page.login('sherlock', 'elementary')
 
         then: 'he gets access to the announcement listing page'
         at AnnouncementListingPage
@@ -29,7 +30,8 @@ class AnnouncementControllerSpec extends GebSpec {
         at LoginPage
 
         when: 'signs in with a ROLE_EMPLOYEE user'
-        login('watson', '221Bbakerstreet')
+        LoginPage page = browser.page(LoginPage)
+        page.login('watson', '221Bbakerstreet')
 
         then: 'he gets access to the announcement listing page'
         at AnnouncementListingPage
