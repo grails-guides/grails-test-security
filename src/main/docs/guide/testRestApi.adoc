@@ -12,7 +12,28 @@ include::{sourceDir}/gradle.properties[]
 include::{sourceDir}/build.gradle[tags=micronaut]
 ----
 
-Our first test will verify that the _/api/announcements_ endpoint is only accessible to users with role _ROLE_BOSS_
+Micronaut HTTP client makes easy to bind JSON Payloads to POGOs. Create several POGOs which we will use in the test:
+
+[source,groovy]
+./src/integration-test/groovy/example/grails/BearerToken.groovy
+----
+include::{sourceDir}/src/integration-test/groovy/example/grails/BearerToken.groovy[indent=0]
+----
+
+[source,groovy]
+./src/integration-test/groovy/example/grails/CustomError.groovy
+----
+include::{sourceDir}/src/integration-test/groovy/example/grails/CustomError.groovy[indent=0]
+----
+
+[source,groovy]
+./src/integration-test/groovy/example/grails/UserCredentials.groovy
+----
+include::{sourceDir}/src/integration-test/groovy/example/grails/UserCredentials.groovy[indent=0]
+----
+
+Our first test will verify that the _/api/announcements_ endpoint is only accessible to users with role _ROLE_BOSS_.
+
 
 [source,groovy]
 ./src/integration-test/groovy/example/grails/ApiAnnouncementControllerSpec.groovy
