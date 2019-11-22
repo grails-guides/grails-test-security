@@ -84,7 +84,7 @@ dependencies {
     testCompile "org.mockito:mockito-core"
     testCompile "org.grails:grails-web-testing-support"
     // tag::micronaut[]
-    testCompile "io.micronaut:micronaut-http-client:$micronautVersion"
+    testCompile "io.micronaut:micronaut-http-client"
     // end::micronaut[]
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
