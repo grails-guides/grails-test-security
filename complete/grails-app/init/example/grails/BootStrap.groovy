@@ -7,25 +7,29 @@ class BootStrap {
 
     AnnouncementService announcementService
 
+    UserService userService
+
+    SecurityRoleService securityRoleService
+
+    UserSecurityRoleService userSecurityRoleService
+
     def init = { servletContext ->
 
-        def authorities = ['ROLE_BOSS', 'ROLE_EMPLOYEE']
+        List<String> authorities = ['ROLE_BOSS', 'ROLE_EMPLOYEE']
         authorities.each { String authority ->
-            if ( !SecurityRole.findByAuthority(authority) ) {
-                new SecurityRole(authority: authority).save()
+            if ( !securityRoleService.findByAuthority(authority) ) {
+                securityRoleService.save(authority)
             }
         }
 
-        if ( !User.findByUsername('sherlock') ) {
-            def u = new User(username: 'sherlock', password: 'elementary')
-            u.save()
-            new UserSecurityRole(user: u, securityRole: SecurityRole.findByAuthority('ROLE_BOSS')).save()
+        if ( !userService.findByUsername('sherlock') ) {
+            User u = userService.save('sherlock', 'elementary')
+            userSecurityRoleService.save(u, securityRoleService.findByAuthority('ROLE_BOSS'))
         }
 
-        if ( !User.findByUsername('watson') ) {
-            def u = new User(username: 'watson', password: '221Bbakerstreet')
-            u.save()
-            new UserSecurityRole(user: u, securityRole: SecurityRole.findByAuthority('ROLE_EMPLOYEE')).save()
+        if ( !userService.findByUsername('watson') ) {
+            User u = userService.save('watson', '221Bbakerstreet')
+            userSecurityRoleService.save(u, securityRoleService.findByAuthority('ROLE_EMPLOYEE'))
         }
 
         announcementService.save('The Hound of the Baskervilles')
