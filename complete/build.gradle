@@ -72,7 +72,7 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.4.0.Final"
     compile "org.grails.plugins:gsp"
     // tag::dependencySSR[]
-    compile 'org.grails.plugins:spring-security-rest:2.0.0.RC1'
+    compile 'org.grails.plugins:spring-security-rest:3.0.0.RC1'
     compile 'org.grails.plugins:spring-security-core:4.0.0.RC2'
     // end::dependencySSR[]
     console "org.grails:grails-console"
