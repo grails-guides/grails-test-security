@@ -1,12 +1,6 @@
 To test REST part of the application, we use https://docs.micronaut.io/snapshot/guide/index.html#httpClient[Micronaut's HttpClient]. We need to add the dependency:
 
 [source,groovy]
-./gradle.properties
-----
-include::{sourceDir}/gradle.properties[]
-----
-
-[source,groovy]
 ./build.gradle
 ----
 include::{sourceDir}/build.gradle[tags=micronaut]
