@@ -72,6 +72,7 @@ include::{sourceDir}/grails-app/conf/application.groovy[indent=0]
 
 We'll populate our database in `BootStrap`, inserting two users when the application starts.
 
+[source,groovy]
 .grails-app/init/example/grails/BootStrap.groovy
 ----
 include::{sourceDir}/grails-app/init/example/grails/BootStrap.groovy[indent=0]
