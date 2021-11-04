@@ -43,7 +43,7 @@ class ApiAnnouncementControllerSpec extends Specification {
         jsonError.isPresent()
         jsonError.get().status == 401
         jsonError.get().error == 'Unauthorized'
-        jsonError.get().message == 'No message available'
+        jsonError.get().message == null
         jsonError.get().path == '/api/announcements'
     }
 
