@@ -123,11 +123,8 @@ tasks.withType(Test) {
 }
 
 webdriverBinaries {
-    chromedriver {
-        version = '77.0.3865.40'
-        architecture = 'X86'
-    }
-    geckodriver '0.24.0'
+    chromedriver '95.0.4638.17'
+    geckodriver '0.30.0'
 }
 
 tasks.withType(Test) { useJUnitPlatform() }
