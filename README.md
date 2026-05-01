@@ -1,7 +1,11 @@
-# Grails Guide - Testing a Secured Grails Application
+# Testing a Secured Grails Application
 
-This example application demonstrates how to build a test the security of a Grails app; both api and web pages. 
+This repository contains the worked sample app for the [Testing a Secured Grails Application](https://grails.apache.org/guides/grails-test-security/4/guide/index.html) guide on the Apache Grails site.
 
-The completed example source code can be find in the `complete` directory.
+## Run the example
 
-The published guide can be found on the [Grails Guides website](http://guides.grails.org/grails-test-security/guide/index.html)
+`./gradlew bootRun`
+
+## Maintained at apache/grails-static-website
+
+The guide narrative is maintained at https://github.com/apache/grails-static-website. Changes to the guide content go there; this repo holds the worked sample app only.
